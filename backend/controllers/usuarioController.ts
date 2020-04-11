@@ -8,11 +8,35 @@ class usuarioController {
   constructor() {  }
                 //req: Request
   public update(req: any, res:Response) {
-    //si llegamos aquí es pqse ha validado el middleware 'validarToken'
-    res.json({
-      ok: true,
-      usuario: req.usuario
+    //si llegamos aquí es pq se ha validado el middleware 'validarToken'
+    //actualizamos con los datos que vienen de la request
+    const user = {
+      nombre: req.body.nombre || req.body.nombre,
+      email: req.body.email || req.body.email,
+      avatar: req.body.avatar || req.body.avatar
+    }
+    //actualizamos los datos del usuario
+    UsuarioModel.findByIdAndUpdate( req.usuario._id, user, { new: true }, (err, userDB) => {
+      if ( err ) throw err;
+      if ( !userDB ){
+        return res.json({
+          ok: false,
+          mensaje: 'No existe el usuario con ese  id'
+        })
+      }
+      //llega la info del usuario para actualizarse. Hay que actualizar tb el token
+      const tokenUser = Token.getJwtToken({ //payload
+        _id: userDB._id,
+        nombre: userDB.nombre,
+        email: userDB.email,
+        avatar: userDB.avatar
+      });
+      res.json({
+          ok: true,
+          token: tokenUser
+      });
     })
+    
   }
   public new(req: Request,res:Response) {
     
