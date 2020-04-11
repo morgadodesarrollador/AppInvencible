@@ -23,7 +23,7 @@ export default class Token {
                 if (err){  //con confiar en el token
                     reject(); //fuera se trabaja con el catch
                 }else {
-                    resolve (decoded);
+                    resolve (decoded); //devuelve el decoded
                 }
             })
         })

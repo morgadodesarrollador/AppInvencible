@@ -6,7 +6,14 @@ import Token from '../clases/token';
 class usuarioController {
 
   constructor() {  }
-  
+                //req: Request
+  public update(req: any, res:Response) {
+    //si llegamos aquí es pqse ha validado el middleware 'validarToken'
+    res.json({
+      ok: true,
+      usuario: req.usuario
+    })
+  }
   public new(req: Request,res:Response) {
     
     //recibir info de la req --> necesito pasar el server por un middleware. 
