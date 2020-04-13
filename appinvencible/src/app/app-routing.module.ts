@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
+  { path: 'register', pathMatch: 'full', component: RegisterComponent },
   { path: 'home', pathMatch: 'full', component: HomeComponent },
   {
     path: 'folder/:id',

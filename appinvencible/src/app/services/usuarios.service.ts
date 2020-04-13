@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
-import { ILogin, MsnAPIUser } from '../interfaces/UsuarioInterface';
+import { IUsario, ILogin, MsnAPIUser } from '../interfaces/UsuarioInterface';
 import { Observable } from 'rxjs';
+import { resolve } from 'url';
 
 const URL = environment.url;
 @Injectable({
@@ -19,6 +20,24 @@ export class UsuariosService {
   ruta: string = '';
   data: any;
   constructor(private http: HttpClient, private storage: Storage) { }
+
+  register( datosRegistro: IUsario): Promise<MsnAPIUser> {
+    const ruta = `${ URL }/usuarios/new`;
+    const data = datosRegistro;
+    return new Promise( resolve => {
+      this.http.post<MsnAPIUser>(ruta, data)
+        .subscribe (respuesta => {
+          if (respuesta.ok) {
+            this.saveToken(respuesta.token);
+            resolve (respuesta);
+          } else { // no se crea el registro
+            this.token = null;
+            this.storage.clear();
+            resolve(respuesta);
+          }
+        });
+    })
+  }
 
   login( datosLogin: ILogin ): Promise<MsnAPIUser> {
     const email = datosLogin.email;

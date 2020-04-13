@@ -4,13 +4,6 @@ export interface ILogin {
     password: string;
 }
 
-export interface IRegitro {
-    email: string;
-    password: string;
-    avatar: string;
-    nombre: string;
- }
-
 export interface MsnAPIUser {
      ok: string;
      mensaje?: string;
@@ -18,9 +11,9 @@ export interface MsnAPIUser {
  }
 
 export interface IUsario {
-    _id: number;
-    email: string;
-    password: string;
-    avatar: string;
-    nombre: string;
+    _id?: number;
+    email?: string;
+    password?: string;
+    avatar?: string;
+    nombre?: string;
  }

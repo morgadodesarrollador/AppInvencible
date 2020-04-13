@@ -61,10 +61,10 @@ class usuarioController {
               ok: true,
               token: tokenUser
           })
-    }).catch( err => {
-            res.json({
+    }).catch( err => { // hemos de distinguir casos, campos requeridos, clave unica(email ...)
+            res.json({ // devolver los diferentes  casos de error en la inserccion
                 ok: false,
-                err
+                mensaje: 'email existe ...'
             })
     })
   
