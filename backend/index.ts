@@ -23,7 +23,7 @@ server.app.use(function(req, res, next) {
   });
 
 //conectar BD Mongo
-mongoose.connect('mongodb://185.166.212.59:27017/Ususarios',
+mongoose.connect('mongodb://185.166.212.59:27017/Usuarios',
                     { useCreateIndex: true, useNewUrlParser: true },
   ( err ) => {
     if ( err ) throw err;

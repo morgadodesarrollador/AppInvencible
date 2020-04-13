@@ -79,7 +79,7 @@ class usuarioController {
         if (!userDB) {
             return res.json({
                 ok: false,
-                mensaje: 'Usuario/contraseña no válidos'
+                mensaje: 'email no existe'
             })
         }
         //3-. el email existe en la BD --> hemos de comparar elpassword
@@ -99,7 +99,7 @@ class usuarioController {
         }else { //contraseña no es válida
             return res.json({
                 ok: false,
-                mensaje: 'Usuario/contraseña no válidos'
+                mensaje: 'La contraseña no válidos'
             })
         }
     })
