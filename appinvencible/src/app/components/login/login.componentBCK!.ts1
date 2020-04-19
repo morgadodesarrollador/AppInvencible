@@ -27,10 +27,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
-    console.log(this.usuario);
     this.uS.login(this.usuario)
      .subscribe(respuesta => {
-      console.log (respuesta);
       if ( respuesta.ok ){  // respuesta['ok']
         this.uS.saveToken (respuesta.token); // respuesta['token']
         this.navCtrl.navigateRoot ('/home', { animated: true });

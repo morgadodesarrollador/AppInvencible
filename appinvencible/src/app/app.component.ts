@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UsuariosService } from './services/usuarios.service';
+import { IUsario } from './interfaces/UsuarioInterface';
 
 @Component({
   selector: 'app-root',
@@ -44,14 +46,24 @@ export class AppComponent implements OnInit {
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  usuario: IUsario;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private uS: UsuariosService
   ) {
     this.initializeApp();
+    
   }
+
+  // Forma2-. nos subscribimos a cualquier cambio que haga el servicio en el usuario  logeado/registrdo
+
+  async getUsuario(){
+    this.usuario = await this.uS.getUsuario();
+  }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -61,6 +73,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUsuario();
+    //Forma1-. nos subscribimos a cualquier cambio que haga el servicio en el usuario  logeado/registrdo
+    this.uS.enviarUsuarioObservable.subscribe(respuesta => {
+     this.usuario = respuesta; 
+    });
+
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());

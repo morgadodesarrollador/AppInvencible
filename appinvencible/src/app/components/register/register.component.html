@@ -23,16 +23,27 @@
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" required name= "pass" [(ngModel)]="usuario.password"></ion-input>
     </ion-item>
-
-    <ion-item lines="full">
-      <ion-label position="floating">Avatar</ion-label>
-      <ion-input type="text" required name= "avatar" [(ngModel)]="usuario.avatar"></ion-input>
-    </ion-item>
-
+    <ion-row>
+      <ion-col>
+        <ion-item lines="full">
+          <ion-label position="floating">Avatar</ion-label>
+          <ion-input type="text" required name= "avatar" [(ngModel)]="usuario.avatar"></ion-input>
+        </ion-item>
+      </ion-col>
+        <ion-item>
+          <ion-icon name="camera-outline" (click)="hacerfoto()"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="image-outline"></ion-icon>
+        </ion-item>
+    </ion-row>
+    
+    
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="primary">Sign Up</ion-button>
       </ion-col>
     </ion-row>
+
   </form>
 </ion-content>

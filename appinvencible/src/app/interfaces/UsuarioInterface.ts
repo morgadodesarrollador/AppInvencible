@@ -8,6 +8,7 @@ export interface MsnAPIUser {
      ok: string;
      mensaje?: string;
      token?: string;
+     userDB?: IUsario;
  }
 
 export interface IUsario {
@@ -16,4 +17,5 @@ export interface IUsario {
     password?: string;
     avatar?: string;
     nombre?: string;
+    foto?: any;
  }

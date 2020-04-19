@@ -48,6 +48,7 @@ class usuarioController {
       avatar: req.body.avatar,
       password: bcrypt.hashSync(req.body.password,10)
     }
+    console.log(req.body);
     //UsuarioModel es un modelo de mongoose, para hacer busquedas,querys ...
     UsuarioModel.create(user)
         .then( userDB => { //userDB regresa de mongodb
@@ -72,6 +73,7 @@ class usuarioController {
  
   public login(req: Request,res:Response) {
     const body = req.body;
+    console.log(body);
     UsuarioModel.findOne ({ email: body.email }, (err, userDB ) => {
         //1-. caso de error de BD lo muestra y salimos
         if ( err ) throw err; 
@@ -92,9 +94,11 @@ class usuarioController {
               email: userDB.email,
               avatar: userDB.avatar
             });
+            console.log (userDB);
             res.json({
                 ok: true,
-                token: tokenUser
+                token: tokenUser, 
+                userDB: userDB
             })
         }else { //contraseña no es válida
             return res.json({
@@ -105,20 +109,7 @@ class usuarioController {
     })
   };
 
-  public intializeRoutes() {
-   // this.router.get(this.path, this.getAllPosts);
-   // this.router.post(this.path, this.createAPost);
-  }
- 
-  getAllPosts = (request: express.Request, response: express.Response) => {
-  //  response.send(this.posts);
-  }
- 
-  createAPost = (request: express.Request, response: express.Response) => {
-    const post: Post = request.body;
- //   this.posts.push(post);
-    response.send(post);
-  }
+  
 }
  
 export default usuarioController;

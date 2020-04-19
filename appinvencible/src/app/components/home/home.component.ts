@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { IUsario } from '../../interfaces/UsuarioInterface';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-
-  constructor() { 
-   
+  usuario: IUsario;
+  constructor( private uS: UsuariosService ) { 
+    
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUsuario();
+    console.log(this.usuario); // undefined
+  }
 
-  login() {
-    
+  async getUsuario(){
+    this.usuario = await this.uS.getUsuario();
+  }
+
+  getUsuario1() {
+    this.uS.leerUsuario()
+      .then(user => {
+        this.usuario = user;
+      })
   }
 
 }

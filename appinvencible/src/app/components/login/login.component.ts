@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
 
     if (respuesta.ok){
       // entramos a la aplicación al home
+      console.log (respuesta.userDB);
       this.navCtrl.navigateRoot ('/home', { animated: true });
 
     } else {

@@ -39,5 +39,5 @@ server.app.use('/usuarios', usuariosRouter);
 
 //levantar express y como callback le pasamos la función flecha
 server.start( ()=> {
-    console.log(`servidor corriendo en puerto  ${ server.port } ...`);
+    console.log(`servidor corriendo http://${server.host}:${server.port} ...`);
 });
