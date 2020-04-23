@@ -29,7 +29,9 @@ export class RegisterComponent implements OnInit {
   };
 
   constructor(private camera: Camera, private http: HttpClient, private  uS: UsuariosService,
-              private uiS: UiServiceService, private navCtrl: NavController ) { }
+              private uiS: UiServiceService, private navCtrl: NavController,
+              // tslint:disable-next-line: deprecation
+              ) { }
 
   ngOnInit() {}
 
@@ -49,7 +51,21 @@ export class RegisterComponent implements OnInit {
     }
 
   }
-
+  galeria(){
+    this.camera.Direction = {BACK: 0, FRONT: 1};
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true, // permite modificar la imagen 
+      correctOrientation: true,
+      targetHeight: 400, // tamaño de la imagen
+      targetWidth: 400,
+      cameraDirection: 1 // dirección de la cámara, (en android no funciona)
+    }
+    this.procesarImagen(options);
+  }
   hacerFoto() {
     this.camera.Direction = {BACK: 0, FRONT: 1};
     const options: CameraOptions = {
@@ -60,6 +76,10 @@ export class RegisterComponent implements OnInit {
       targetWidth: 400,
       cameraDirection: 1 // dirección de la cámara, (en android no funciona)
     }
+    this.procesarImagen(options);
+  }
+
+  procesarImagen(options: CameraOptions) {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
@@ -71,9 +91,12 @@ export class RegisterComponent implements OnInit {
        this.usuario.foto = 'data:image/jpeg;base64,' + imageData;
  // imageData es el string base64 de la imagen
        this.respuesta.base64 = imageData;
- 
+       this.uS.uploadImagen ( imageData );
      }, (err) => {
       // Handle error
      });
   }
+
+  
+
 }

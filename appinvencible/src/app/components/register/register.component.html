@@ -31,13 +31,21 @@
         </ion-item>
       </ion-col>
         <ion-item>
-          <ion-icon name="camera-outline" (click)="hacerfoto()"></ion-icon>
+          <ion-icon name="camera-outline" (click)="hacerFoto()">camara</ion-icon>
         </ion-item>
         <ion-item>
-          <ion-icon name="image-outline"></ion-icon>
+          <ion-icon name="image-outline" (click)="galeria()">Galeria</ion-icon>
         </ion-item>
     </ion-row>
-    
+    <ion-row>
+      <ion-item>
+        <div class="card" *ngIf="usuario.foto">
+          <div class="header">
+            <img class="avatar" [src]="usuario.foto" alt="">
+          </div>
+        </div>
+      </ion-item>
+    </ion-row>
     
     <ion-row>
       <ion-col>

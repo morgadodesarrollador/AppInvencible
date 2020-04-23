@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { IUsario, ILogin, MsnAPIUser } from '../interfaces/UsuarioInterface';
 import { Observable, Subject } from 'rxjs';
 import { resolve } from 'url';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 const URL = environment.url;
 @Injectable({
@@ -22,7 +23,8 @@ export class UsuariosService {
   };
   ruta: string = '';
   data: any;
-  constructor(private http: HttpClient, private storage: Storage) { }
+  // tslint:disable-next-line: deprecation
+  constructor(private http: HttpClient, private storage: Storage, private fileT: FileTransfer ) { }
 
   public enviarUsuarioSubject = new Subject<IUsario>();
   public enviarUsuarioObservable = this.enviarUsuarioSubject.asObservable();
@@ -39,7 +41,6 @@ export class UsuariosService {
         .subscribe (respuesta => {
           if (respuesta.ok) {
             this.saveToken(respuesta.token);
-            
             resolve (respuesta);
           } else { // no se crea el registro
             this.token = null;
@@ -65,6 +66,7 @@ export class UsuariosService {
             this.saveToken (respuesta.token); // respuesta['token']
             this.usuario = respuesta.userDB;
             this.enviarUsuario();
+            
             resolve (respuesta);
           } else {                            // intento fallido
             this.token = null;
@@ -91,6 +93,7 @@ export class UsuariosService {
   // async es para que retorne una promesa
   async saveToken(token: string) {
     this.token = token;
+    console.log(this.token);
     // await: Esperamos (bloqueo) hasta que token se haya almacenado en el storage y al app no siga
     await this.storage.set('token', token); // almacenamos el token
   }
@@ -101,6 +104,24 @@ export class UsuariosService {
     await this.storage.set('usuario', user); // almacenamos el token
   }
 
-  
-  
+  uploadImagen( img: string ){
+    console.log(img );
+    console.log('tk = ', this.token);
+    const options: FileUploadOptions = {
+      fileKey: 'image',
+      headers: {
+        'x-token': this.token,
+      }
+    }
+    // creamos una tarea. En fileTransfer tengo info de la subida
+    const fileTransfer: FileTransferObject = this.fileT.create();
+    fileTransfer.upload( img, `${ URL }/uploads`, options )
+      .then( data => {
+        console.log( data )
+      }).catch( err => {
+        console.log(' error en carga ', err )
+      });
+
+  }
+
 }
