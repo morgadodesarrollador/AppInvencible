@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction} from 'express';
 import Token from '../clases/token';
                             //req: Request
-export const verificaToken = (req: any, res: Response, next: NextFunction){
+export const verificaToken = (req: any, res: Response, next: NextFunction) => {
     //leemos la variable x-token del header y almacenamos en userToken
     const userToken = req.get('x-token') || '';
     //invocamos a checkToken

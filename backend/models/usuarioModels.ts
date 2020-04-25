@@ -18,7 +18,10 @@ const usuarioSchema = new Schema({
     password: {
         type: String,
         required: [ true, 'password es requerido']
-    }
+    },
+    imgs: [{
+        type: String
+    }]
     
 });
 
@@ -32,11 +35,12 @@ usuarioSchema.method('compararPassword', function( password: string = ''): boole
     }
 });
 
-interface IUsuario  extends Document {
+export interface IUsuario  extends Document {
     nombre: string;
-    avatar: string;
+    avatar?: string;
     email: string;
     password: string;
+    imgs: [];
     compararPassword(password:string):boolean;
 }
 

@@ -8,6 +8,9 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { UiServiceService } from '../../services/ui-services.service';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
+import { ImagesSanitizerPipe } from '../../pipes/images-sanitizer.pipe';
+
+declare var window: any;
 
 @Component({
   selector: 'app-register',
@@ -51,10 +54,10 @@ export class RegisterComponent implements OnInit {
     }
 
   }
-  galeria(){
+  galeria() {
     this.camera.Direction = {BACK: 0, FRONT: 1};
     const options: CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -69,7 +72,13 @@ export class RegisterComponent implements OnInit {
   hacerFoto() {
     this.camera.Direction = {BACK: 0, FRONT: 1};
     const options: CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+    //  destinationType: this.camera.DestinationType.DATA_URL,
+
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA,
       allowEdit: true, // permite modificar la imagen 
       correctOrientation: true,
       targetHeight: 400, // tamaño de la imagen
@@ -80,6 +89,30 @@ export class RegisterComponent implements OnInit {
   }
 
   procesarImagen(options: CameraOptions) {
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        const img = window.Ionic.WebView.convertFileSrc( imageData );
+        console.log (img);
+        this.usuario.foto =  img;
+        this.uS.uploadImagen ( imageData );
+      }, (err) => {
+        console.log (err);
+    });
+  }
+
+  hacerFoto1() {
+    this.camera.Direction = {BACK: 0, FRONT: 1};
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      allowEdit: true, // permite modificar la imagen 
+      correctOrientation: true,
+      targetHeight: 400, // tamaño de la imagen
+      targetWidth: 400,
+      cameraDirection: 1 // dirección de la cámara, (en android no funciona)
+    }
+    this.procesarImagen(options);
+  }
+  procesarImagen1(options: CameraOptions) {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
@@ -91,7 +124,7 @@ export class RegisterComponent implements OnInit {
        this.usuario.foto = 'data:image/jpeg;base64,' + imageData;
  // imageData es el string base64 de la imagen
        this.respuesta.base64 = imageData;
-       this.uS.uploadImagen ( imageData );
+       this.uS.uploadImagen ( this.usuario.foto );
      }, (err) => {
       // Handle error
      });

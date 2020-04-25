@@ -17,11 +17,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { ImagesSanitizerPipe } from './pipes/images-sanitizer.pipe';
 
 
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, RegisterComponent, ImagesSanitizerPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -35,6 +36,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
     StatusBar,
     SplashScreen,
     Camera,
+    // tslint:disable-next-line: deprecation
     FileTransfer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

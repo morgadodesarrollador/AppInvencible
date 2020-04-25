@@ -16,8 +16,8 @@ export class UsuariosService {
   token: string = '';
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      // tslint:disable-next-line: max-line-length
+      'Content-Type': 'application/x-www-form-urlencoded,',
+      'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',      // tslint:disable-next-line: max-line-length
       'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method'
     })
   };
@@ -105,23 +105,28 @@ export class UsuariosService {
   }
 
   uploadImagen( img: string ){
-    console.log(img );
-    console.log('tk = ', this.token);
+    // tslint:disable-next-line: max-line-length
+    this.token  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Il9pZCI6IjVlYTQzMjg3MTY4Njg5MzdhNGEyNTE4MyIsIm5vbWJyZSI6Im1vcmdhZG8iLCJlbWFpbCI6Im1nQGcuY29tIiwiYXZhdGFyIjoibW9yZ2FkbyJ9LCJpYXQiOjE1ODc4MTkxNDQsImV4cCI6MTU5MDQxMTE0NH0.NzPmCk_rYcdInWlBa9qnJXsMlgIFDVcFDssbIhVxw8U';
     const options: FileUploadOptions = {
-      fileKey: 'image',
-      headers: {
-        'x-token': this.token,
-      }
+        fileKey: 'image',
+        chunkedMode: false,
+        mimeType: "image/jpeg",
+       // mimeType: 'multipart/form-data',
+        httpMethod: 'POST',
+        headers: {
+          'x-token': this.token,
+        }
     }
-    // creamos una tarea. En fileTransfer tengo info de la subida
+    // creamos una tarea. En fileTransfer tengo info de la subidaruta
+    const ruta = `${ URL }/usuarios/upload`;
+    console.log (img, ruta, options);
     const fileTransfer: FileTransferObject = this.fileT.create();
-    fileTransfer.upload( img, `${ URL }/uploads`, options )
+    fileTransfer.upload( img, ruta, options )
       .then( data => {
-        console.log( data )
+        console.log(data)
       }).catch( err => {
-        console.log(' error en carga ', err )
+        console.log(' error en carga ', err)
       });
-
   }
 
 }

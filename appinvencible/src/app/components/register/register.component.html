@@ -41,7 +41,7 @@
       <ion-item>
         <div class="card" *ngIf="usuario.foto">
           <div class="header">
-            <img class="avatar" [src]="usuario.foto" alt="">
+            <img class="avatar" [src]="usuario.foto | imagesSanitizer" alt="">
           </div>
         </div>
       </ion-item>

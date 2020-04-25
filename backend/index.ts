@@ -4,6 +4,8 @@ import cors from 'cors';
 import usuariosRouter from "./routes/usuarios";
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import fileUpload from 'express-fileupload';
+
 
 const server = new Server();
 
@@ -11,6 +13,9 @@ const server = new Server();
 //body-parser: cogera toda la información delpost (req) y preparará un objeto json. 
 server.app.use( bodyParser.urlencoded({ extended: true })); //recibir peticiones x-urlencoded
 server.app.use( bodyParser.json()); //infodelosposteos en json
+
+// FileUpload <-- middleware
+server.app.use( fileUpload({ useTempFiles: true }) );
 
 //configurar CORS
 server.app.use( cors ({ origin: true, credentials: true }));
