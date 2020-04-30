@@ -11,7 +11,10 @@
   <form #fRegister="ngForm" (ngSubmit)="register(fRegister)" >
     <ion-item lines="full">
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" name= "nombre" [(ngModel)]="usuario.nombre" ></ion-input>
+      <ion-input 
+          type="text" name= "nombre" 
+          [(ngModel)]="usuario.nombre" >
+      </ion-input>
     </ion-item>
 
     <ion-item lines="full">
@@ -30,18 +33,13 @@
           <ion-input type="text" required name= "avatar" [(ngModel)]="usuario.avatar"></ion-input>
         </ion-item>
       </ion-col>
-        <ion-item>
-          <ion-icon name="camera-outline" (click)="hacerFoto()">camara</ion-icon>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="image-outline" (click)="galeria()">Galeria</ion-icon>
-        </ion-item>
+      
     </ion-row>
     <ion-row>
       <ion-item>
         <div class="card" *ngIf="usuario.foto">
           <div class="header">
-            <img class="avatar" [src]="usuario.foto | imagesSanitizer" alt="">
+            <img class="avatar" [src]="usuario.foto" alt="">
           </div>
         </div>
       </ion-item>

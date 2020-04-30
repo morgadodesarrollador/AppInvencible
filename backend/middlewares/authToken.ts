@@ -5,6 +5,7 @@ import Token from '../clases/token';
 export const verificaToken = (req: any, res: Response, next: NextFunction) => {
     //leemos la variable x-token del header y almacenamos en userToken
     const userToken = req.get('x-token') || '';
+    console.log('tk =  ', userToken);
     //invocamos a checkToken
     Token.ckeckToken( userToken ) //promesa
         .then( (decoded: any) =>  { //si es cierto, obtenemos el payload (datos decodificados)

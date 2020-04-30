@@ -17,12 +17,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { ImagesSanitizerPipe } from './pipes/images-sanitizer.pipe';
-
-
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, RegisterComponent, ImagesSanitizerPipe],
+  declarations: [AppComponent, HeaderComponent, HomeComponent, LoginComponent, RegisterComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -30,6 +28,7 @@ import { ImagesSanitizerPipe } from './pipes/images-sanitizer.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    PipesModule,
     IonicStorageModule.forRoot()
   ],
   providers: [

@@ -2,6 +2,7 @@ import { IFileUpload } from '../interfaces/file-upload';
 import path from 'path'; // de node
 import fs from 'fs'; // tratamiento de archivos --> node
 import uniqid from 'uniqid';
+import { resolve } from 'dns';
 
 // esta clase crealas carpetas de los usuarios con su id donde suben las imagenes
 export default class CFileSystem {
@@ -9,9 +10,10 @@ export default class CFileSystem {
     constructor() { }
 
     saveImageTemp( file: IFileUpload, idUser: string){ // retorna una PROMESA   
-        console.log('grabar');
+
         return  new Promise( ( resolve, reject ) => {
              // nombre de carpeta
+            
             const path = this.newFolderUser (idUser);
             //nombre de archivo
             const nombreArchivo = this.generarNombreUnico(file.name);
@@ -23,7 +25,7 @@ export default class CFileSystem {
                     reject (err); // lanzo el err fuera
                 } else {
                     // todo ok
-                    resolve();
+                    resolve(nombreArchivo);
                 }
             } );  
 
@@ -55,6 +57,18 @@ export default class CFileSystem {
         return pathUserTmp
     }
 
+    public deleteFile (idUser:string, img: string) {
+        return new Promise ((resolve, reject)=>{
+            const pathUsers = path.resolve ( __dirname, '../uploads/', idUser, 'users');
+            const ruta = `${ pathUsers }/${img}`;
+            fs.unlink(ruta, (err: any) => {
+                if (err) reject (err)
+                resolve (true);
+            });
+        });
+        
+        
+    }
     public moverImagenesTempaUsers( idUser: string ){
         const pathTmp = path.resolve ( __dirname, '../uploads/', idUser, 'tmp');
         const pathUsers = path.resolve ( __dirname, '../uploads/', idUser, 'users');
@@ -65,7 +79,7 @@ export default class CFileSystem {
         if ( !fs.existsSync( pathUsers )){ // existe tmp, y no users
             fs.mkdirSync( pathUsers );
         }
-        const imagenesTmp = this.GetImagenesTmp( idUser );
+        const imagenesTmp = this.GetImagenesDir( idUser , 'tmp');
 
         imagenesTmp.forEach (imagen => {
             fs.renameSync(`${pathTmp}/${imagen }`, `${pathUsers}/${imagen }`);
@@ -74,8 +88,19 @@ export default class CFileSystem {
         return imagenesTmp;
     }
 
-    private GetImagenesTmp (idUser: string ){
-        const pathTmp = path.resolve ( __dirname, '../uploads/', idUser, 'tmp');
+    public GetImagenesDir (idUser: string, folder: string ){
+        const pathTmp = path.resolve ( __dirname, '../uploads/', idUser, folder);
         return fs.readdirSync (pathTmp) || [];
+    }
+
+    public getFotoUrl (userId: string,  img: string){
+
+        const pathFoto = path.resolve( __dirname, '../uploads', userId, 'users', img);
+
+        const existe = fs.existsSync (pathFoto);
+        if (!existe){
+            return path.resolve( __dirname, '../assets/400x250.jpg')
+        }
+        return pathFoto;
     }
 }

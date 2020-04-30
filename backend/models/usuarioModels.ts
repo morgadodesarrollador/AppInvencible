@@ -35,6 +35,11 @@ usuarioSchema.method('compararPassword', function( password: string = ''): boole
     }
 });
 
+usuarioSchema.method('deleteImagen', function (userId: string, index: number): boolean {
+    
+    return false;
+})
+
 export interface IUsuario  extends Document {
     nombre: string;
     avatar?: string;

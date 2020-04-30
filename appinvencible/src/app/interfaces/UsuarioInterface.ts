@@ -18,4 +18,5 @@ export interface IUsario {
     avatar?: string;
     nombre?: string;
     foto?: any;
+    imgs?: Array <string>;
  }

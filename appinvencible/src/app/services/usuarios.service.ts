@@ -16,9 +16,10 @@ export class UsuariosService {
   token: string = '';
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded,',
-      'enctype': 'multipart/form-data; boundary=----WebKitFormBoundaryuL67FWkv1CA',      // tslint:disable-next-line: max-line-length
-      'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      // tslint:disable-next-line: max-line-length
+      'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+      'x-token': this.token
     })
   };
   ruta: string = '';
@@ -26,6 +27,7 @@ export class UsuariosService {
   // tslint:disable-next-line: deprecation
   constructor(private http: HttpClient, private storage: Storage, private fileT: FileTransfer ) { }
 
+  // detectamos el usuario logeado y actulizamos emitiendo los datos personales al resto de componentes 
   public enviarUsuarioSubject = new Subject<IUsario>();
   public enviarUsuarioObservable = this.enviarUsuarioSubject.asObservable();
 
@@ -33,9 +35,68 @@ export class UsuariosService {
     this.enviarUsuarioSubject.next(this.usuario);
   }
 
+  getDatosUsuario(): Promise<MsnAPIUser>{
+    const opciones = {
+      headers: {
+        'x-token': this.token
+      }
+    };
+
+    const ruta = `${ URL }/usuarios/view`;
+    console.log (opciones);
+    return new Promise ( resolve => {
+      this.http.post<MsnAPIUser>(ruta, '', opciones)
+        .subscribe( data => {
+          resolve (data);
+        });
+    });
+  }
+
+  deleteImage(index): Promise<MsnAPIUser>{
+
+    const opciones = {
+      headers: {
+        'x-token': this.token
+      }
+    };
+    const ruta = `${ URL }/usuarios/imagen/delete/${this.usuario._id}/${index}`;
+    
+    return new Promise( resolve => {
+      this.http.post<MsnAPIUser>(ruta, null, opciones)
+        .subscribe( respuesta => {
+          resolve ( respuesta );
+        });
+    });
+  }
+  update( datosUsuario: IUsario): Promise<MsnAPIUser>{
+    const opciones = {
+      headers: {
+        'x-token': this.token
+      }
+    };
+    const ruta = `${ URL }/usuarios/update`;
+    const data = datosUsuario;
+    console.log (data);
+    return new Promise( resolve =>{
+      this.http.post<MsnAPIUser>(ruta, data, opciones)
+        .subscribe (respuesta =>{
+          console.log(respuesta);
+          if (respuesta.ok){
+            // actualizamos el storage con token y usuarios y comunicamos
+            this.saveToken(respuesta.token);
+            this.saveUser(respuesta.userDB);
+            this.usuario = respuesta.userDB;
+            this.enviarUsuario();
+          }
+          resolve (respuesta)
+        })
+    })
+  }
+  
   register( datosRegistro: IUsario): Promise<MsnAPIUser> {
     const ruta = `${ URL }/usuarios/new`;
     const data = datosRegistro;
+    console.log(data);
     return new Promise( resolve => {
       this.http.post<MsnAPIUser>(ruta, data)
         .subscribe (respuesta => {
@@ -62,11 +123,11 @@ export class UsuariosService {
       this.http.post <MsnAPIUser>( ruta, datosLogin )
         .subscribe(respuesta => {
           if ( respuesta.ok ){                // respuesta['ok']
+          // actualizamos el storage con token y usuarios y comunicamos
             this.saveUser(respuesta.userDB);
             this.saveToken (respuesta.token); // respuesta['token']
             this.usuario = respuesta.userDB;
             this.enviarUsuario();
-            
             resolve (respuesta);
           } else {                            // intento fallido
             this.token = null;
@@ -76,7 +137,7 @@ export class UsuariosService {
         })
     })
   }
-  
+  // del storage
   getUsuario(): Promise<IUsario> {
     return new Promise<IUsario>( resolve => {
       this.storage.get('usuario')
@@ -105,11 +166,10 @@ export class UsuariosService {
   }
 
   uploadImagen( img: string ){
-    // tslint:disable-next-line: max-line-length
-    this.token  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Il9pZCI6IjVlYTQzMjg3MTY4Njg5MzdhNGEyNTE4MyIsIm5vbWJyZSI6Im1vcmdhZG8iLCJlbWFpbCI6Im1nQGcuY29tIiwiYXZhdGFyIjoibW9yZ2FkbyJ9LCJpYXQiOjE1ODc4MTkxNDQsImV4cCI6MTU5MDQxMTE0NH0.NzPmCk_rYcdInWlBa9qnJXsMlgIFDVcFDssbIhVxw8U';
     const options: FileUploadOptions = {
         fileKey: 'image',
         chunkedMode: false,
+        // tslint:disable-next-line: quotemark
         mimeType: "image/jpeg",
        // mimeType: 'multipart/form-data',
         httpMethod: 'POST',
@@ -119,7 +179,6 @@ export class UsuariosService {
     }
     // creamos una tarea. En fileTransfer tengo info de la subidaruta
     const ruta = `${ URL }/usuarios/upload`;
-    console.log (img, ruta, options);
     const fileTransfer: FileTransferObject = this.fileT.create();
     fileTransfer.upload( img, ruta, options )
       .then( data => {

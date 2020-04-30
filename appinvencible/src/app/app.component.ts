@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { UsuariosService } from './services/usuarios.service';
@@ -52,7 +52,9 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private uS: UsuariosService
+    private uS: UsuariosService,
+    private navCtrl: NavController,
+    public menuCtrl: MenuController,
   ) {
     this.initializeApp();
     
@@ -84,4 +86,9 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+
+  perfil() {
+    console.log('perfil');
+    this.navCtrl.navigateRoot ('/usuarios/update', { animated: true });
+    this.menuCtrl.toggle();  }
 }

@@ -2,11 +2,18 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+        <ion-item  *ngIf="usuario">
+          <ion-label>
+              <h3>{{ usuario.nombre }}</h3>
+              <h5>{{usuario.email}}</h5>
+          </ion-label>
+          <ion-thumbnail slot="end">
+            <ion-img id="perfil" (click)="perfil()" [src] = "usuario.avatar |  viewImage: usuario._id "></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+
         <ion-list id="inbox-list">
-          <div *ngIf="usuario">
-             <ion-list-header>{{ usuario.nombre }}</ion-list-header>
-              <ion-note>{{usuario.email}}</ion-note>
-          </div>
+          
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
