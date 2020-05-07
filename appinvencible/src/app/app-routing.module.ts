@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'reservas',
+    path: '',
     loadChildren: () => import('./reservas/reservas.module').then( m => m.ReservasModule)
   },
   {

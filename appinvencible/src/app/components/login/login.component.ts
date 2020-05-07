@@ -15,8 +15,8 @@ import { Storage } from '@ionic/storage';
 export class LoginComponent implements OnInit {
 
  public usuario: ILogin = {
-   email: '',
-   password: ''
+   email: 'morgado@gmail.com',
+   password: '1234'
   };
 
   constructor( private uS: UsuariosService, private storage: Storage, 

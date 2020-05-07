@@ -1,0 +1,61 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button>kdlkaJS</ion-back-button>
+    </ion-buttons>
+    <ion-title>Reservas Turísticas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="newReserva()"  routerDirection="forward">
+        <ion-icon color="primary" size="large" name="add-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="listarReservas()"  routerDirection="forward">
+        <ion-icon color="primary" name="reader-outline"  size="large"></ion-icon>
+      </ion-button>
+      <ion-button color="secondary">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>    
+  </ion-toolbar>
+ 
+ 
+  <router-outlet>
+    
+  </router-outlet> 
+</ion-content>
+
+<!--
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>
+-->
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="schedule">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Schedule</ion-label>
+      <ion-badge>6</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="speakers" (click)="newReserva()">
+      <ion-icon color="primary" size="large" name="add-circle-sharp"></ion-icon>
+      <ion-label>Speakers</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="map" (click)="listarReservas()">
+      <ion-icon color="primary" name="reader-outline"  size="large"></ion-icon>
+      <ion-label>List</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="about">
+      <ion-icon name="information-circle"></ion-icon>
+      <ion-label>About</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

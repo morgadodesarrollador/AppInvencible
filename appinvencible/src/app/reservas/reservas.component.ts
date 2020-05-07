@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
 import { ReservasService } from '../services/reservas.service';
 
 @Component({
@@ -8,15 +10,23 @@ import { ReservasService } from '../services/reservas.service';
 })
 export class ReservasComponent implements OnInit {
 
-  constructor(private _rs: ReservasService) { }
+  constructor(private _rs: ReservasService,  private navCtrl: NavController) { }
 
+  newReserva(){
+    this.navCtrl.navigateRoot ('/reservas/(second:new)', { animated: true });
+  }
+
+  listarReservas(){
+    this.navCtrl.navigateRoot ('/reservas/(second:listar)', { animated: true });
+  }
   ngOnInit() {
     console.log('componente');
-    this._rs.getReservas().subscribe(
+  /*  this._rs.getReservas().subscribe(
       respuesta => {
         console.log('pepe'),
         console.log(respuesta);
       })
+      */
   }
 
 }

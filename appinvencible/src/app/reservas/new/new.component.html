@@ -1,0 +1,66 @@
+<ion-content padding>
+  <ion-card class="card">
+    <ion-card-header  color="primary">
+      <ion-card-title>Nuevo reserva</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="7" >
+            <ion-item>
+              <ion-label position="floating">Cliente</ion-label>
+              <ion-input type="text" [(ngModel)]="reserva.cliente"></ion-input>
+            </ion-item> 
+          </ion-col>
+          <ion-col size="5"  >
+            <ion-item>
+              <ion-label position="floating">Agencia</ion-label>
+              <ion-input type="text"  [(ngModel)]="reserva.agencia"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col siz="8">
+            <ion-item>
+              <ion-label position="floating">Ciudad</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col siz="4">
+            <ion-item>
+              <ion-label position="stacked">duración</ion-label>
+              <ion-input type="number" [(ngModel)]="reserva.temporada.duracion"  ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">F.Inicio</ion-label>
+              <ion-input  type="date" [(ngModel)]="reserva.temporada.finicio" (ionChange)="getDias()"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">F.Fin</ion-label>
+              <ion-input type="date" [(ngModel)]="reserva.temporada.ffin" (ionChange)="getDias()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon size="large" color="success"  (click)="new()"
+                slot="end" name="checkmark-circle"></ion-icon>
+            </ion-item>
+            
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  
+  
+</ion-content>
