@@ -2,6 +2,9 @@
 import Server from "./server";
 import cors from 'cors';
 import usuariosRouter from "./routes/usuarios";
+import libreriaRouter from './routes/libreria';
+import reservasRouter from './routes/reservas';
+
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import fileUpload from 'express-fileupload';
@@ -38,7 +41,8 @@ mongoose.connect('mongodb://185.166.212.59:27017/Usuarios',
 
 //rutas de mi app
 server.app.use('/usuarios', usuariosRouter);
-
+server.app.use('/libreria', libreriaRouter);
+server.app.use('/reservas', reservasRouter);
 
 
 
