@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TemporadasModule } from './modulos/temporadas/temporadas.module';
 
 const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./reservas/reservas.module').then( m => m.ReservasModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./modulos/temporadas/temporadas.module').then( m => m.TemporadasModule)
   },
   {
     path: 'usuarios',

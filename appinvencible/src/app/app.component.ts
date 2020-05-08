@@ -15,6 +15,11 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
+      title: 'Temporadas',
+      url: '/temporadas',
+      icon: 'archive'
+    },
+    {
       title: 'Reservas',
       url: '/reservas',
       icon: 'mail'
@@ -28,11 +33,6 @@ export class AppComponent implements OnInit {
       title: 'Login',
       url: '/login',
       icon: 'heart'
-    },
-    {
-      title: 'Archived',
-      url: '/home',
-      icon: 'archive'
     },
     {
       title: 'Trash',
@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getUsuario();
-    //Forma1-. nos subscribimos a cualquier cambio que haga el servicio en el usuario  logeado/registrdo
+    // Forma1-. nos subscribimos a cualquier cambio que haga el servicio en el usuario  logeado/registrdo
     this.uS.enviarUsuarioObservable.subscribe(respuesta => {
      this.usuario = respuesta; 
     });

@@ -1,0 +1,81 @@
+<ion-content padding>
+  <ion-card class="card">
+    <ion-card-header  color="primary">
+      <ion-card-title>Nueva Temporada</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="7">
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input type="text" [(ngModel)]="temporada.nombre"></ion-input>
+            </ion-item> 
+          </ion-col>
+          <ion-col size="5">
+            <ion-item>
+              <ion-label position="floating">Año</ion-label>
+              <ion-input type="text" [(ngModel)]="temporada.year"></ion-input>
+            </ion-item> 
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">F.Desde</ion-label>
+              <ion-input  type="date" [(ngModel)]="temporada.fdesde"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">F.Hasta</ion-label>
+              <ion-input type="date" [(ngModel)]="temporada.fhasta"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Precio Base</ion-label>
+              <ion-input  type="number" [(ngModel)]="temporada.precioBase"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Precio Adicional</ion-label>
+              <ion-input type="number" [(ngModel)]="temporada.precioAdic"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Precio Domingo a Jueves</ion-label>
+              <ion-input  type="number" [(ngModel)]="temporada.precioSemana"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label position="floating">Precio Viernes y Sábado</ion-label>
+              <ion-input type="number" [(ngModel)]="temporada.precioFSemana"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-icon size="large" color="success"  (click)="new()"
+                slot="end" name="checkmark-circle"></ion-icon>
+            </ion-item>
+            
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  
+  
+</ion-content>
+
