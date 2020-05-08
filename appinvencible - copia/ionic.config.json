@@ -1,7 +1,0 @@
-{
-  "name": "appinvencible",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
