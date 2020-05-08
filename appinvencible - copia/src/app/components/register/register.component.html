@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [routerLink]="['/usuarios']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #fRegister="ngForm" (ngSubmit)="register(fRegister)" >
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input 
+          type="text" name= "nombre" 
+          [(ngModel)]="usuario.nombre" >
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" name= "email"  [(ngModel)]="usuario.email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" required name= "pass" [(ngModel)]="usuario.password"></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="full">
+          <ion-label position="floating">Avatar</ion-label>
+          <ion-input type="text" required name= "avatar" [(ngModel)]="usuario.avatar"></ion-input>
+        </ion-item>
+      </ion-col>
+      
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <div class="card" *ngIf="usuario.foto">
+          <div class="header">
+            <img class="avatar" [src]="usuario.foto" alt="">
+          </div>
+        </div>
+      </ion-item>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary">Sign Up</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

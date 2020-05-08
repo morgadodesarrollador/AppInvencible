@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { ILogin, MsnAPIUser } from '../../interfaces/UsuarioInterface';
+import { UsuariosService } from '../../services/usuarios.service';
+import { UiServiceService } from '../../services/ui-services.service';
+import { NavController } from '@ionic/angular';
+
+import { Storage } from '@ionic/storage';
+
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class LoginComponent implements OnInit {
+
+ public usuario: ILogin = {
+   email: '',
+   password: ''
+  };
+
+  constructor( private uS: UsuariosService, private storage: Storage, 
+               private uiS: UiServiceService, private navCtrl: NavController) { 
+    console.log(this.usuario);
+  }
+
+  ngOnInit() {}
+
+  login() {
+    this.uS.login(this.usuario)
+     .subscribe(respuesta => {
+      if ( respuesta.ok ){  // respuesta['ok']
+        this.uS.saveToken (respuesta.token); // respuesta['token']
+        this.navCtrl.navigateRoot ('/home', { animated: true });
+        return false;
+      } else { //intento fallido
+        this.uiS.alertaInformativa(respuesta.mensaje);
+        this.uS.token = null;
+        this.storage.clear();
+      }
+    })
+  }
+}

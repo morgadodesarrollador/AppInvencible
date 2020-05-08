@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home  </ion-title>
+    <p *ngIf="usuario">{{ usuario.email }}</p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h2>Apartamentos Turísticos</h2>
+    <ion-item>
+      <ion-icon name="camera-outline" (click)="hacerFoto()">camara</ion-icon>
+    </ion-item>
+    
+
+</ion-content>

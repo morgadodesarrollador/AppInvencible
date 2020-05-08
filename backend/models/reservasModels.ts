@@ -10,6 +10,9 @@ const temporadaSchema  = new Schema({
 const reservaSchema = new Schema({
     cliente: { type: String },
     agencia: { type: String },
+    estado: { type: String },
+    npersonas: { type: Number },
+    fReserva: { type:  Date },
     temporada: { type: temporadaSchema }
 });
 
