@@ -8,6 +8,7 @@ const reservasRouter = Router();
 const reservasCtrl  = new reservasController();
 
 reservasRouter.post('/new', verificaToken, reservasCtrl.new);
+reservasRouter.post('/filtrar', verificaToken, reservasCtrl.filtrar);
 
 
 export default reservasRouter;

@@ -22,7 +22,7 @@ class temporadasController {
   };
 
   public new(req: any,res:Response) {
-    console.log('nueva temporada ...', req.body.year);
+    console.log('nueva temporada ...', req.body);
     const temporadaYear = new TemporadasModel();
     temporadaYear.year = req.body.year;
     const temporada: ITemporada = {

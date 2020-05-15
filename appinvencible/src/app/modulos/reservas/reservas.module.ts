@@ -6,7 +6,7 @@ import { ReservasRoutingModule } from './reservas-routing.module';
 import { ReservasComponent } from './reservas.component';
 import { NewComponent } from './new/new.component';
 import { ListarComponent } from './listar/listar.component';
-
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [ReservasComponent, NewComponent, ListarComponent],
@@ -14,6 +14,7 @@ import { ListarComponent } from './listar/listar.component';
     CommonModule,
     ReservasRoutingModule,
     FormsModule,
+    PipesModule,
     IonicModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

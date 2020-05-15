@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ITemporada } from '../../../interfaces/TemporadasInterface';
+import { ITemporada, ITemporadas } from '../../../interfaces/TemporadasInterface';
 import { TemporadasService } from '../../../services/temporadas.service';
 
 
@@ -10,15 +10,17 @@ import { TemporadasService } from '../../../services/temporadas.service';
 })
 export class NewComponent implements OnInit {
 
-  temporada: ITemporada = {
+  temporadas: ITemporadas = {
     year:0,
-    nombre: 'Temporada  Alta',
-    precioBase: 0,
-    precioAdic: 20,
-    precioFSemana: 0,
-    precioSemana: 0,
-    fdesde: null,
-    fhasta: null
+    temporada : [{
+      nombre: 'Temporada  Alta',
+      precioBase: 0,
+      precioAdic: 20,
+      precioFSemana: 0,
+      precioSemana: 0,
+      fdesde: null,
+      fhasta: null
+    }]
   };
 
   constructor(private tS: TemporadasService) { }

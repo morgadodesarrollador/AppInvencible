@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IReserva } from '../../interfaces/ReservasInterface';
-import { ReservasService } from '../../services/reservas.service';
+import { IReserva } from '../../../interfaces/ReservasInterface';
+import { ReservasService } from '../../../services/reservas.service';
 
 @Component({
   selector: 'app-new',

@@ -6,8 +6,8 @@ const temporada = new Schema({
     precioAdic: { type: Number },
     precioSemana: { type: Number },
     precioFSemana: { type: Number },
-    fdesde: { type: Date },
-    fhasta: { type: Date },
+    fdesde: { type: String },
+    fhasta: { type: String },
 })
 
 const temporadasSchema  = new Schema({

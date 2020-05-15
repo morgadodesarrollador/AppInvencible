@@ -10,13 +10,14 @@ export interface IReserva {
     _id?: string;
     cliente?: string;
     agencia?: string;
+    anio?: number;
     temporada: ITemporada;
  }
 
 export interface MsnAPIReserva {
      ok: string;
      mensaje?: string;
-     reservaDB?: IReserva;
+     reservasDB?: IReserva[];
  }
 
 

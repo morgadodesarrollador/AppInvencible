@@ -1,8 +1,58 @@
 <h2>
   listar temporadas!
 </h2>
-<ul> {{ temporadas.year}}
-  <li *ngFor="let temp of temporadas.temporada">
-    {{ temp.nombre }}
-  </li>
-</ul>
+<ion-grid>
+  <ion-row class="titulos">
+    <ion-col size="3">
+      <ion-label>
+        Nombre
+      </ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label>
+        Finicio
+      </ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label>
+        FFin
+      </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>
+        Ano
+      </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>
+        P.Base
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngFor="let temp of temporadas.temporada">
+    <ion-col size="3">
+      <ion-label>
+        {{ temp.nombre }}
+      </ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label>
+        {{ temp.fdesde }}
+      </ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <ion-label>
+        {{ temp.fhasta }}
+      </ion-label>    </ion-col>
+    <ion-col size="1">
+      <ion-label>
+      {{ temporadas.year}}
+      </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>
+      {{ temp.precioBase }}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+</ion-grid>

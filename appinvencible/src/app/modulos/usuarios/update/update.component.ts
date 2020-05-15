@@ -1,13 +1,13 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { UsuariosService } from '../../services/usuarios.service';
+import { UsuariosService } from '../../../services/usuarios.service';
 
 import { HttpClient } from '@angular/common/http';
 import { NavController , IonSlides} from '@ionic/angular';
-import { UiServiceService } from '../../services/ui-services.service';
-import { ImagenInterface } from '../../interfaces/imagenInterface';
-import { IUsario, MsnAPIUser } from '../../interfaces/UsuarioInterface';
-import { ViewImagePipe } from '../../pipes/view-image.pipe';
+import { UiServiceService } from '../../../services/ui-services.service';
+import { ImagenInterface } from '../../../interfaces/imagenInterface';
+import { IUsario, MsnAPIUser } from '../../../interfaces/UsuarioInterface';
+import { ViewImagePipe } from '../../../pipes/view-image.pipe';
 
 declare var window: any;
 

@@ -2,7 +2,6 @@
 import Server from "./server";
 import cors from 'cors';
 import usuariosRouter from "./routes/usuarios";
-import libreriaRouter from './routes/libreria';
 import reservasRouter from './routes/reservas';
 import temporadasRouter from "./routes/temporadas";
 
@@ -32,7 +31,7 @@ server.app.use(function(req, res, next) {
   });
 
 //conectar BD Mongo
-mongoose.connect('mongodb://185.166.212.59:27017/Usuarios',
+mongoose.connect('mongodb://185.166.212.59:27017/AppTuristico',
                     { useCreateIndex: true, useNewUrlParser: true },
   ( err ) => {
     if ( err ) throw err;
@@ -42,7 +41,6 @@ mongoose.connect('mongodb://185.166.212.59:27017/Usuarios',
 
 //rutas de mi app
 server.app.use('/usuarios', usuariosRouter);
-server.app.use('/libreria', libreriaRouter);
 server.app.use('/reservas', reservasRouter);
 server.app.use('/temporada', temporadasRouter);
 

@@ -6,7 +6,7 @@ import { UsuariosComponent } from './usuarios.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UpdateComponent } from './update/update.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 
 
 @NgModule({

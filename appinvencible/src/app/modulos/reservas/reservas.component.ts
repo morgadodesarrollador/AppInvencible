@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { ReservasService } from '../services/reservas.service';
+import { ReservasService } from '../../services/reservas.service';
 
 @Component({
   selector: 'app-reservas',

@@ -1,4 +1,5 @@
 export  interface ITemporada {
+    year?: number;
     nombre?: string;
     precioBase?: number;
     precioAdic?: number;
