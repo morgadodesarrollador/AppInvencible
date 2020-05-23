@@ -17,13 +17,15 @@ export class NewComponent implements OnInit {
     temporada: {
       finicio: null,
       ffin: null,
-      duracion:  0,
+     // duracion: 0,
       mes: 0,
-      anio: 0
+      anio: {
+        valor: 0,
+        operador: '='
+      }
     }
   }
   constructor(private reservaS: ReservasService) {
-    
     console.log(this.reserva)
    }
   
@@ -31,9 +33,9 @@ export class NewComponent implements OnInit {
     this.finicio = new Date(this.reserva.temporada.finicio);
     this.ffin = new Date(this.reserva.temporada.ffin);
     const diasdif = this.ffin.getTime() - this.finicio.getTime();
-    this.reserva.temporada.duracion = Math.round(diasdif/(1000*60*60*24));
+    this.reserva.temporada.duracion.valor = Math.round(diasdif/(1000*60*60*24));
     this.reserva.temporada.mes = this.finicio.getMonth() + 1;
-    this.reserva.temporada.anio = this.finicio.getFullYear();
+    this.reserva.temporada.anio.valor = this.finicio.getFullYear();
   }
   new(){
     

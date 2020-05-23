@@ -29,12 +29,18 @@ reservaSchema.virtual('finicio')
     return this.finicio.toISOString().substring(0,10);
   });
 
+export interface INumero {
+    valor: number;
+    operador: string;
+}
+
 export  interface ITemporada {
     finicio?: Date;
     ffin?: Date;
     duracion?: number;
     mes?: number;
     anio?: number;
+    estancia?: INumero;
 }
 
 export interface IReserva  extends Document {

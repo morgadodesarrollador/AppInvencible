@@ -7,9 +7,10 @@ import { ReservasComponent } from './reservas.component';
 import { NewComponent } from './new/new.component';
 import { ListarComponent } from './listar/listar.component';
 import { PipesModule } from '../../pipes/pipes.module';
+import { OperadoresComponent } from '../../components/operadores/operadores.component';
 
 @NgModule({
-  declarations: [ReservasComponent, NewComponent, ListarComponent],
+  declarations: [ReservasComponent, NewComponent, ListarComponent, OperadoresComponent],
   imports: [
     CommonModule,
     ReservasRoutingModule,

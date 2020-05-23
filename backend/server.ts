@@ -4,7 +4,7 @@ import express from 'express';
 export default  class Server {
     public app : express.Application;
     public port : number = 3000;
-    public host : string= '192.168.1.28';
+    public host : string= '192.168.1.61';
     
     constructor() {
         this.app = express();

@@ -16,7 +16,7 @@
       <ion-col size="4">
         <ion-item>
           <ion-label>Año</ion-label>
-          <ion-select placeholder="Select One" [(ngModel)]="params.temporada.anio">
+          <ion-select placeholder="Select One" [(ngModel)]="params.temporada.anio.valor">
             <ion-select-option>2022</ion-select-option>
             <ion-select-option>2021</ion-select-option>
             <ion-select-option>2020</ion-select-option>
@@ -24,10 +24,13 @@
           </ion-select>
         </ion-item>
       </ion-col>
-      <ion-col size="2">
-        <ion-label>Duracion</ion-label>
-        <ion-input [(ngModel)]="params.temporada.duracion"></ion-input>
-      </ion-col>
+      <ion-col size="3">
+        <ion-item lines="full">
+          <ion-label>Duracion</ion-label>
+          <app-operadores (operador)="params.temporada.duracion.operador = $event"></app-operadores>
+          <ion-input [(ngModel)]="params.temporada.duracion.valor"></ion-input>
+        </ion-item>
+     </ion-col>
       <ion-col>
         <ion-item (click)="filtrar()" color="success"  fill='clear' size='small'>
           <ion-icon name="newspaper-outline"></ion-icon>

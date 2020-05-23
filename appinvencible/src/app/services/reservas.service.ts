@@ -14,14 +14,14 @@ export class ReservasService {
 
   constructor(private http: HttpClient, private uS: UsuariosService) { }
 
-  filtrar(parametros: any): Promise<MsnAPIReserva> {
+  filtrar(parametros: IReserva): Promise<MsnAPIReserva> {
     const opciones = {
       headers: {
         'x-token': this.uS.token
       }
     };
     const ruta = `${ URL }/reservas/filtrar`;
-    console.log(parametros, opciones);
+    console.log({parametros});
     return new Promise (resolve => {
       this.http.post<MsnAPIReserva>(ruta, {parametros}, opciones)
         .subscribe (respuesta => {
