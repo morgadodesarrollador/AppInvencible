@@ -6,13 +6,13 @@ const temporadaSchema  = new Schema({
     duracion: { type: Number },
     anio: { type: Number },
     mes: { type: Number },
+    npersonas: { type: Number },
 });
 const reservaSchema = new Schema({
     cliente: { type: String },
     agencia: { type: String },
-    anio: { type: Number },
+    ciudad: { type: String },
     estado: { type: String },
-    npersonas: { type: Number },
     fReserva: { type:  Date },
     temporada: { type: temporadaSchema }
 });
@@ -30,22 +30,23 @@ reservaSchema.virtual('finicio')
   });
 
 export interface INumero {
-    valor: number;
+    valor: number | Date;
     operador: string;
 }
 
 export  interface ITemporada {
-    finicio?: Date;
-    ffin?: Date;
+    finicio?: Date | INumero;
+    ffin?: Date | INumero;
     duracion?: number;
     mes?: number;
-    anio?: number;
-    estancia?: INumero;
+    anio?: number | INumero;
+    npersonas: number | INumero;
 }
 
 export interface IReserva  extends Document {
     cliente?: string;
     agencia?: string;
+    ciudad?: string;
     temporada: ITemporada;
 }
 

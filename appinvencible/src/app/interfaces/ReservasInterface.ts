@@ -1,19 +1,21 @@
 export interface INumero {
-    valor: number;
-    operador: string;
+    valor?: number | Date;
+    operador?: string;
 }
 
 export  interface ITemporada {
-    finicio?: Date;
-    ffin?: Date;
-    duracion?: INumero;
+    finicio?: Date | INumero;
+    ffin?: Date | INumero;
+    duracion?: number | INumero;
     mes?: number;
-    anio?: INumero;
+    anio?: number | INumero;
+    npersonas?: number | INumero;
 }
 
 export interface IReserva {
     _id?: string;
     cliente?: string;
+    ciudad?: string;
     agencia?: string;
     temporada: ITemporada;
  }

@@ -12,3 +12,32 @@ ion-label {
     font-size: 12px;
     font-family: Acme;
 }
+
+ion-label,ion-select, ion-input {
+    font-size:14px;
+    text-align: left;
+    padding: 0 !important;;
+    margin: 0;;
+}
+
+#where .caja {
+    display: flex;
+    flex-flow: row wrap;
+}
+#where .caja ion-label{
+    width: 100%;
+    border: 0px solid black;
+    padding: 0px !important;;
+}
+#where .caja app-operadores{
+    width: 30%;
+    font-size: 16px;
+    color: blue;
+    border: 0px solid black;
+    padding: 0px !important;;
+}
+#where .caja ion-datetime, #where .caja ion-input{
+    width: 70%;
+    text-align: right;
+    font-size: 12px;
+}

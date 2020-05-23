@@ -18,28 +18,24 @@ class reservasController {
     console.log(params);
     let filtro = {} as IFiltro;
     let valor:string  = '';
-    let ruta: Object = {};
+    let ruta: string;
     Object.keys(params).forEach( item => {
-      ruta = `${item}` as Object;
+      ruta = `${item}`;
       console.log ('--> ',ruta  );
      // dot.paths(ruta).forEach( key => { // recorre cada objeto
       if (typeof params[item] != 'object'){
         valor  = dot.get(params, ruta);
-      //  console.log ('--> valor ', ruta, valor);
         filtro[ruta] = valor;
       }else{
         Object.keys(params[item]).forEach( key => { 
-          ruta = `${item}.${key}`as Object;
+          ruta = `${item}.${key}`;
           valor  = dot.get(params, ruta);
-        //  console.log ('-->  hijo :', ruta, valor);
-        //  console.log (Object.keys(valor));
           if (Object.keys(valor) == [])
             filtro[ruta] = valor;
           else
             if (Object.keys(valor).indexOf('operador') == 0){
-              const ruta_op = `${item}.${key}.operador`as Object;
-              const ruta_val = `${item}.${key}.valor`as Object;
-             // console.log(ruta_op, ruta_val);
+              const ruta_op = `${item}.${key}.operador`;
+              const ruta_val = `${item}.${key}.valor`;
               const operador = dot.get(params, ruta_op);
               const valor = dot.get(params, ruta_val);
               if (operador  == '>'){
@@ -76,10 +72,12 @@ class reservasController {
     const reserva = new ReservasModel();
     reserva.cliente = req.body.cliente;
     reserva.agencia = req.body.agencia;
+    reserva.ciudad = req.body.ciudad;
     reserva.temporada = req.body.temporada;
+    console.log(reserva);
     ReservasModel.create(reserva)
       .then( reserevaDB => {
-        console.log(reserevaDB.temporada.finicio);
+        console.log(reserevaDB);
         res.json({
           ok: true,
           mensaje: 'reserva insertada', 

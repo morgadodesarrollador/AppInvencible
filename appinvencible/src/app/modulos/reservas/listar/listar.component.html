@@ -1,36 +1,52 @@
 <ion-content padding>
   <h2>Listar reservas</h2>
-  <ion-grid>
+  <ion-grid id="where">
     <ion-row>
-      <ion-col size="4">
-        <ion-item>
+      <ion-col size="2">
           <ion-label>Agencia</ion-label>
-          <ion-select placeholder="Select One"  [(ngModel)]="params.agencia">
+          <ion-select size="small" [(ngModel)]="params.agencia" >   
             <ion-select-option value="">All</ion-select-option>
             <ion-select-option value="booking">Booking</ion-select-option>
             <ion-select-option value="airbnb">AirBnB</ion-select-option>
             <ion-select-option value="expedia">Expedia</ion-select-option>
           </ion-select>
-        </ion-item>
       </ion-col>
-      <ion-col size="4">
-        <ion-item>
+      <ion-col size="2">
           <ion-label>Año</ion-label>
-          <ion-select placeholder="Select One" [(ngModel)]="params.temporada.anio.valor">
+          <ion-select #year size="small" (ngModelChange)="cambiar(year.value)"
+                                         [(ngModel)]="params.temporada.anio.valor">
             <ion-select-option>2022</ion-select-option>
             <ion-select-option>2021</ion-select-option>
             <ion-select-option>2020</ion-select-option>
             <ion-select-option>2019</ion-select-option>
           </ion-select>
-        </ion-item>
       </ion-col>
-      <ion-col size="3">
-        <ion-item lines="full">
-          <ion-label>Duracion</ion-label>
-          <app-operadores (operador)="params.temporada.duracion.operador = $event"></app-operadores>
-          <ion-input [(ngModel)]="params.temporada.duracion.valor"></ion-input>
-        </ion-item>
+      <ion-col size="2">
+          <div class="caja">
+            <ion-label>Duracion</ion-label>
+            <app-operadores (operador)="params.temporada.duracion.operador = $event"></app-operadores>
+            <ion-input [(ngModel)]="params.temporada.duracion.valor"></ion-input>
+          </div>
      </ion-col>
+     <ion-col size="2">
+          <div class="caja">
+            <ion-label>Personas</ion-label>
+            <app-operadores (operador)="params.npersonas.operador = $event"></app-operadores>
+            <ion-input [(ngModel)]="params.temporada.npersonas.valor"></ion-input>
+          </div>
+     </ion-col>
+     <ion-col size="3">
+        <div class="caja">
+          <ion-label>F.Inicio</ion-label>
+          <app-operadores (operador)="params.temporada.finicio.operador = $event"></app-operadores>
+          <ion-input type="date" [(ngModel)]="params.temporada.finicio.valor"></ion-input>
+
+          <!--
+          <ion-datetime #calendar displayFormat="MMM/DD/YY" [(ngModel)]="params.temporada.finicio.valor"
+                        placeholder="Select Date" yearValues="2019, 2020,  2021"
+                        display-timezone="utc"></ion-datetime> -->
+        </div>
+      </ion-col>
       <ion-col>
         <ion-item (click)="filtrar()" color="success"  fill='clear' size='small'>
           <ion-icon name="newspaper-outline"></ion-icon>
@@ -40,14 +56,24 @@
   </ion-grid>
   <ion-grid>
     <ion-row class="titulos">
-      <ion-col size="3">
+      <ion-col size="1">
         <ion-label>
             Agencia
         </ion-label>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="1">
         <ion-label>
           Cliente
+        </ion-label>
+      </ion-col>
+      <ion-col size="1">
+        <ion-label>
+          Ciudad
+        </ion-label>
+      </ion-col>
+      <ion-col size="1">
+        <ion-label>
+          Personas
         </ion-label>
       </ion-col>
       <ion-col size="2">
@@ -55,7 +81,7 @@
           FFinicio
         </ion-label>
       </ion-col>
-      <ion-col size="1">
+      <ion-col size="2">
         <ion-label>
           FFin
         </ion-label>
@@ -67,14 +93,24 @@
       </ion-col>
     </ion-row>
     <ion-row *ngFor="let reserva of reservas">
-      <ion-col size="3">
+      <ion-col size="1">
         <ion-label>
           {{ reserva.agencia }}
         </ion-label>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="1">
         <ion-label>
           {{ reserva.cliente }}
+        </ion-label>
+      </ion-col>
+      <ion-col size="1">
+        <ion-label>
+          {{ reserva.ciudad }}
+        </ion-label>
+      </ion-col>
+      <ion-col size="1">
+        <ion-label>
+          {{ reserva.temporada.npersonas }}
         </ion-label>
       </ion-col>
       <ion-col size="2">
@@ -82,7 +118,7 @@
           {{ reserva.temporada.finicio | fechas }}
         </ion-label>    
       </ion-col>
-      <ion-col size="1">
+      <ion-col size="2">
         <ion-label>
           {{ reserva.temporada.ffin  | fechas }}
         </ion-label>
