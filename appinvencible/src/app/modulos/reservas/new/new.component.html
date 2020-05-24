@@ -7,53 +7,51 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="5" >
+          <ion-col size="3" >
             <ion-item>
               <ion-label position="floating">Cliente</ion-label>
               <ion-input type="text" [(ngModel)]="reserva.cliente"></ion-input>
             </ion-item> 
           </ion-col>
-          <ion-col size="5"  >
+          <ion-col size="3">
             <ion-item>
               <ion-label position="floating">Agencia</ion-label>
               <ion-input type="text"  [(ngModel)]="reserva.agencia"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="2"  >
+          <ion-col size="3">
             <ion-item>
               <ion-label position="floating">Ano</ion-label>
               <ion-input type="text"  [(ngModel)]="reserva.temporada.anio"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="4">
+          <ion-col size="3">
             <ion-item>
               <ion-label position="floating">Ciudad</ion-label>
               <ion-input type="text"  [(ngModel)]="reserva.ciudad"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col siz="4">
+        </ion-row>
+        <ion-row>
+          <ion-col size="2">
             <ion-item>
               <ion-label position="stacked">duración</ion-label>
               <ion-input type="number" [(ngModel)]="reserva.temporada.duracion"  ></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col siz="4">
+          <ion-col size="2">
             <ion-item>
               <ion-label position="stacked">Personas</ion-label>
               <ion-input type="number" [(ngModel)]="reserva.temporada.npersonas"  ></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
-        <ion-row >
-          <ion-col size="6">
+          <ion-col size="4">
             <ion-item>
               <ion-label position="floating">F.Inicio</ion-label>
               <ion-input  type="date" [(ngModel)]="reserva.temporada.finicio" (ionChange)="getDias()"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="6">
+          <ion-col size="4">
             <ion-item>
               <ion-label position="floating">F.Fin</ion-label>
               <ion-input type="date" [(ngModel)]="reserva.temporada.ffin" (ionChange)="getDias()"></ion-input>

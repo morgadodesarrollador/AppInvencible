@@ -10,6 +10,11 @@ export  interface ITemporada {
     mes?: number;
     anio?: number | INumero;
     npersonas?: number | INumero;
+    precioTotal?: number | INumero;
+    comision?: number | INumero;
+    precioReal?: number | INumero;
+
+
 }
 
 export interface IReserva {

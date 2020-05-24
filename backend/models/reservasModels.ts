@@ -7,7 +7,11 @@ const temporadaSchema  = new Schema({
     anio: { type: Number },
     mes: { type: Number },
     npersonas: { type: Number },
+    precioTotal: { type: Number }, 
+    comision: { type: Number },
+    precioReal: { type: Number }
 });
+
 const reservaSchema = new Schema({
     cliente: { type: String },
     agencia: { type: String },
@@ -41,6 +45,10 @@ export  interface ITemporada {
     mes?: number;
     anio?: number | INumero;
     npersonas: number | INumero;
+    precioTotal?: number | INumero;
+    comision?: number | INumero;
+    precioReal?: number | INumero;
+
 }
 
 export interface IReserva  extends Document {

@@ -21,7 +21,7 @@ export class ListarComponent implements OnInit {
       anio:     { operador: '>', valor: 0 },
       duracion: { operador: '>', valor: 0 },
       finicio:  { operador: '>', valor: 0 },
-     // ffin:     { operador: '', valor: 0 },
+      ffin:     { operador: '', valor: 0 },
       npersonas: { operador: '>', valor: 0 }
     }
   }

@@ -34,7 +34,7 @@ export class NewComponent implements OnInit {
     const diasdif = this.ffin.getTime() - this.finicio.getTime();
     this.reserva.temporada.duracion = Math.round(diasdif/(1000*60*60*24));
     this.reserva.temporada.mes = this.finicio.getMonth() + 1;
-    this.reserva.temporada.anio.valor = this.finicio.getFullYear();
+    this.reserva.temporada.anio = this.finicio.getFullYear();
   }
   new(){
     
