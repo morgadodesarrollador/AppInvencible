@@ -44,6 +44,7 @@ export class ListarComponent implements OnInit {
     const  resultado = await this.rS.filtrar(this.params);
     if (resultado.ok){
       this.reservas = resultado.reservasDB;
+      
       //  this.reservas.reservasDB  = resultado.reservasDB;
       //  console.log(resultado.reservasDB);
     }

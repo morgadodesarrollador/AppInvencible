@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { ReservasModel, IReserva, INumero  } from '../models/reservasModels';
-import temporadasController from './temporadasController';
+
 import * as dot from 'ts-dot-prop';
 
 //interfaz para formar la Query tipo Dot Notation en el Find()
@@ -14,7 +14,7 @@ class reservasController {
 
   public filtrar(req: any, res:Response){
       
-    let params:IReserva  = req.body.parametros; //vienen las condiciones en un array json
+    let params:any  = req.body.parametros; //vienen las condiciones en un array json
     console.log(params);
     let filtro = {} as IFiltro;
     let valor:string  = '';
@@ -67,17 +67,20 @@ class reservasController {
           })
       })
   }
-  public new(req: any,res:Response) {
+
+public async  new(req: any, res: Response) {
     console.log('nueva reserva ...', req.body);
     const reserva = new ReservasModel();
     reserva.cliente = req.body.cliente;
     reserva.agencia = req.body.agencia;
     reserva.ciudad = req.body.ciudad;
     reserva.temporada = req.body.temporada;
-    console.log(reserva);
+  
+    let c = await reserva.getTemporadas();
+    reserva.temporadas = c;   
+    console.log ('c = ', c);
     ReservasModel.create(reserva)
       .then( reserevaDB => {
-        console.log(reserevaDB);
         res.json({
           ok: true,
           mensaje: 'reserva insertada', 
@@ -90,7 +93,7 @@ class reservasController {
         })
     })
   }
- 
 }
+
  
 export default reservasController;

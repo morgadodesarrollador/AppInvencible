@@ -26,10 +26,11 @@ export class ReservasService {
       this.http.post<MsnAPIReserva>(ruta, {parametros}, opciones)
         .subscribe (respuesta => {
           resolve (respuesta);
-          console.log(respuesta)
-        })
-    })
+          console.log(respuesta);
+        });
+    });
   }
+  
   new(reserva: IReserva): Promise<MsnAPIReserva> {
     const opciones = {
       headers: {

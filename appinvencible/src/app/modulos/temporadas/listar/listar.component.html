@@ -8,7 +8,7 @@
         Nombre
       </ion-label>
     </ion-col>
-    <ion-col size="2">
+    <ion-col size="2">  
       <ion-label>
         Finicio
       </ion-label>
@@ -28,31 +28,38 @@
         P.Base
       </ion-label>
     </ion-col>
+    <ion-col size="1">
+      <ion-label>
+        Pre L..J,D
+      </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>
+        Pre V,S
+      </ion-label>
+    </ion-col>
   </ion-row>
   <ion-row *ngFor="let temp of temporadas.temporada">
     <ion-col size="3">
-      <ion-label>
-        {{ temp.nombre }}
-      </ion-label>
+      <ion-label> {{ temp.nombre }} </ion-label>
     </ion-col>
     <ion-col size="2">
-      <ion-label>
-        {{ temp.fdesde }}
-      </ion-label>
+      <ion-label> {{ temp.fdesde | fechas }}</ion-label>
     </ion-col>
     <ion-col size="2">
-      <ion-label>
-        {{ temp.fhasta }}
-      </ion-label>    </ion-col>
-    <ion-col size="1">
-      <ion-label>
-      {{ temporadas.year}}
-      </ion-label>
+      <ion-label> {{ temp.fhasta | fechas }}</ion-label>    
     </ion-col>
     <ion-col size="1">
-      <ion-label>
-      {{ temp.precioBase }}
-      </ion-label>
+      <ion-label>{{ temporadas.year}} </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label> {{ temp.precioBase }} </ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>{{ temp.precioSemana }}</ion-label>
+    </ion-col>
+    <ion-col size="1">
+      <ion-label>{{ temp.precioFSemana }}</ion-label>
     </ion-col>
   </ion-row>
 </ion-grid>

@@ -6,6 +6,7 @@ import { TemporadasRoutingModule } from './temporadas-routing.module';
 import { TemporadasComponent } from './temporadas.component';
 import { NewComponent } from './new/new.component';
 import { ListarComponent } from './listar/listar.component';
+import { PipesModule } from '../../pipes/pipes.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ListarComponent } from './listar/listar.component';
   imports: [
     CommonModule,
     FormsModule,
+    PipesModule,
     IonicModule.forRoot(),
     TemporadasRoutingModule
   ],

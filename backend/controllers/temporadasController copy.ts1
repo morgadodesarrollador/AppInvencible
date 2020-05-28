@@ -34,14 +34,22 @@ class temporadasController {
       precioFSemana: req.body.precioFSemana,
     } 
 
-    
+    const respuesta: any = temporadaYear.addTemporada(req.body.year, temporada);
+    console.log('-->2');
+    res.json (respuesta);
 
     TemporadasModel.findOne({year:req.body.year}, (err, temporadasDB) => {
         if ( err ) throw err; 
         if (temporadasDB) {
-          const respuesta: any = temporadaYear.addTemporada(req.body.year, temporada);
-          console.log('-->2');
-          res.json (respuesta);
+          temporadasDB.temporada.push(temporada);
+          TemporadasModel.findByIdAndUpdate(temporadasDB._id,temporadasDB,{ new: true }, (err, temporadasDB) =>{
+            if ( err ) throw err; 
+            res.json({
+              ok: true,
+              mensaje: 'Temporada insertada', 
+              temporadasDB: temporadasDB
+            })
+          })
           
         }else{
           temporadaYear.temporada.push(temporada);

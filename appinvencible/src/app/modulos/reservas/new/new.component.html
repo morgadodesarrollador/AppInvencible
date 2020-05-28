@@ -59,6 +59,28 @@
           </ion-col>
         </ion-row>
         <ion-row>
+          <ion-col size="4">
+            <ion-item>
+              <ion-label position="floating">Precio Total</ion-label>
+              <ion-input type="number" (ionChange)="getPReal()" 
+                        [(ngModel)]="reserva.temporada.precioTotal"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item>
+              <ion-label position="floating">Comisión</ion-label>
+              <ion-input type="number" (ionChange)="getPReal()"
+                         [(ngModel)]="reserva.temporada.comision" ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item>
+              <ion-label position="floating">Precio Real</ion-label>
+              <ion-input type="number" [(ngModel)]="reserva.temporada.precioReal"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col>
             <ion-item>
               <ion-icon size="large" color="success"  (click)="new()"

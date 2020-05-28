@@ -10,11 +10,10 @@ export  interface ITemporada {
     mes?: number;
     anio?: number | INumero;
     npersonas?: number | INumero;
-    precioTotal?: number | INumero;
-    comision?: number | INumero;
-    precioReal?: number | INumero;
-
-
+    precioTotal?: number ;
+    comision?: number ;
+    precioReal?: number ;
+    temporadas?: number;
 }
 
 export interface IReserva {
@@ -23,6 +22,7 @@ export interface IReserva {
     ciudad?: string;
     agencia?: string;
     temporada: ITemporada;
+    temporadas?: number;
  }
 
 export interface MsnAPIReserva {

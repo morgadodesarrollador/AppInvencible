@@ -21,9 +21,12 @@ export class NewComponent implements OnInit {
       duracion: 0,
       mes: 0,
       anio: 0,
-      npersonas: 0
+      npersonas: 0,
+      precioTotal: 0, precioReal: 0, comision: 0,
+      temporadas: 0
     }
   }
+
   constructor(private reservaS: ReservasService) {
     console.log(this.reserva)
    }
@@ -43,5 +46,11 @@ export class NewComponent implements OnInit {
 
   }
   ngOnInit() {}
+
+  getPReal(){
+    this.reserva.temporada.precioReal = 
+        this.reserva.temporada.precioTotal as number - this.reserva.temporada.comision as number;
+    
+  }
 
 }
