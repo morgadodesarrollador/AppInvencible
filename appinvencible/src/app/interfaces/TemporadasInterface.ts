@@ -7,6 +7,7 @@ export  interface ITemporada {
     precioSemana?: number;
     fdesde?: Date;
     fhasta?: Date;
+    item?: number;
 }
 
 export interface ITemporadas{

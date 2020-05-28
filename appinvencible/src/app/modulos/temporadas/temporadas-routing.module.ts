@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'temporadas', component: TemporadasComponent,
     children: [
       { path: 'new', component: NewComponent, outlet: 'temporada' },
+      { path: 'update/:id', component: NewComponent, outlet: 'temporada' },
       { path: 'listar', component: ListarComponent, outlet: 'temporada' },
   ]}
 ];

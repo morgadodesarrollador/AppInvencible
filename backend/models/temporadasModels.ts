@@ -57,7 +57,7 @@ export  interface ITemporadaYear extends Document{
     year?: Number;
     temporada: [ITemporada];
     addTemporada(year: number, temporada: ITemporada): any;
-    uptTemporada(temporada: ITemporada): any;
+    uptTemporada(temporada: ITemporada, idTemp: Number): any;
 
 }
 
@@ -69,7 +69,7 @@ temporadasSchema.method('addTemporada', addTemporada);
 temporadasSchema.method('uptTemporada', uptTemporada);
 
 
-function uptTemporada(temporada: ITemporada){
+function uptTemporada(temporada: any, idTemp: Number){
     // 2020-05-01 --> [ '2020', '05', '01' ] -> new Date (2020, 4, 1) -> 2020-05-01T22:00:00.000Z
     //new Date(2020,0,2) --> 2020/01/01
     let dia: Date;
@@ -89,7 +89,7 @@ function uptTemporada(temporada: ITemporada){
         diasDif = dia.getTime() - ene1.getTime();
         diasDif = Math.round(diasDif/(1000*60*60*24));
         
-        this.dias[diasDif].temp = 1;
+        this.dias[diasDif].temp = idTemp;
         console.log (dia, diasDif, this.dias[diasDif].temp);
         dia.setDate(dia.getDate() + 1);
     }
@@ -105,11 +105,10 @@ function addTemporada(year: number, temporada: ITemporada){
         if (temporadasDB) {
             console.log('-->1');
             temporadasDB.temporada.push(temporada);
-            temporadasDB.uptTemporada(temporada);
-            console.log ("--> ", temporadasDB.dias[135]);
+            const idTemp = temporadasDB.temporada.length-1;
+            temporadasDB.uptTemporada(temporada, idTemp);
             TemporadasModel.findByIdAndUpdate(temporadasDB._id,temporadasDB,{ new: true }, (err, temporadasDB) =>{
               if ( err ) throw err; 
-              console.log ("--> ", temporadasDB.dias[135]);
               respuesta = {
                 ok: true,
                 mensaje: 'Temporada insertada', 

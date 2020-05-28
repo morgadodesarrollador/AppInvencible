@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ITemporada } from '../../../interfaces/TemporadasInterface';
 import { TemporadasService } from '../../../services/temporadas.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,9 +10,9 @@ import { TemporadasService } from '../../../services/temporadas.service';
   styleUrls: ['./new.component.scss'],
 })
 export class NewComponent implements OnInit {
-
+  
   temporada: ITemporada = {
-    year:0,
+    year: 0,
     nombre: 'Temporada  Alta',
     precioBase: 0,
     precioAdic: 20,
@@ -20,13 +21,28 @@ export class NewComponent implements OnInit {
     fdesde: null,
     fhasta: null
   };
+  idTemp: number = null;
+  constructor(private tS: TemporadasService, private paramRoute: ActivatedRoute) { }
 
-  constructor(private tS: TemporadasService) { }
+  editar(){
+    console.log('edit')
+  }
+
+  next(){
+    console.log('next')
+  }
+
+  previous(){
+    console.log('previous')
+  }
 
   async new() {
     console.log ( this.temporada );
     await this.tS.new(this.temporada);
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.idTemp = this.paramRoute.snapshot.paramMap.get('id');
+    console.log(this.idTemp);
+  }
 
 }

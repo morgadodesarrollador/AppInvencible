@@ -40,9 +40,7 @@ class temporadasController {
         if ( err ) throw err; 
         if (temporadasDB) {
           const respuesta: any = temporadaYear.addTemporada(req.body.year, temporada);
-          console.log('-->2');
           res.json (respuesta);
-          
         }else{
           temporadaYear.temporada.push(temporada);
           TemporadasModel.create(temporadaYear)
