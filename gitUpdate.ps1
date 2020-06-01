@@ -1,12 +1,9 @@
 Param(
-    [string] $Primero,
-    [string] $Segundo = "valor por defecto"
+    [string] $Primero = "first commit",
+    [string] $Segundo 
 )
-Write-Host $Primero
-Write-Host $Segundo
-/*
+
 git status
 git add .
-git commit -m "first commit"
+git commit -m $Primero
 git push -u origin master
-*/
