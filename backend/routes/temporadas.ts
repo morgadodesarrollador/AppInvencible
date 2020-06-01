@@ -8,6 +8,8 @@ const temporadasRouter = Router();
 const temporadasCtrl  = new temporadasController();
 
 temporadasRouter.post('/new', verificaToken, temporadasCtrl.new);
+temporadasRouter.post('/edit', verificaToken, temporadasCtrl.edit);
+
 temporadasRouter.post('/listar', verificaToken, temporadasCtrl.listar);
 
 

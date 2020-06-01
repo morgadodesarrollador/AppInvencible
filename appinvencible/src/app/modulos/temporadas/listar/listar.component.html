@@ -1,7 +1,16 @@
-<h2>
-  listar temporadas!
-</h2>
-<ion-grid>
+<ion-item>
+  <h4>
+    Calendario
+  </h4>
+  <ion-select slot="end" #year size="small" (ngModelChange)="getTemporada(year.value)"
+                                            [(ngModel)]="anio">   
+    <ion-select-option >2020</ion-select-option>
+    <ion-select-option >2021</ion-select-option>
+    <ion-select-option >2022</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<ion-grid *ngIf="temporadas">
   <ion-row class="titulos">
     <ion-col size="1">
       edit

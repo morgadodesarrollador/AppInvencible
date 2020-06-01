@@ -52,9 +52,9 @@ function setFecha (fecha:Date){
     return fecha.getDate() + '/'  + (fecha.getMonth()+1) + '/'  + fecha.getFullYear();
 }
 
-function getNdia(year: number, fecha: Date){
+function getNdia(year: number, fecha: string){
   let ene1= new Date(year,0,2);
-  var finicio = fecha.toString().split("-");
+  var finicio = fecha.split("-");
   console.log (ene1, finicio);
   let dia: Date = new Date(parseInt(finicio[0]),parseInt(finicio[1])-1,parseInt(finicio[2])+1);
   let diasDif = dia.getTime() - ene1.getTime();
@@ -83,23 +83,63 @@ function uptTemporada(temporada: any, idTemp: Number){
         diasDif = Math.round(diasDif/(1000*60*60*24));
         this.dias[diasDif - 1].temp = idTemp;
         if ( c == 0){
-          temporada.ndiaInicial = (diasDif - 1);
+          this.temporada[idTemp].ndiaInicial = (diasDif - 1);
         }
         console.log (dia, diasDif - 1, this.dias[diasDif - 1].temp);
         dia.setDate(dia.getDate() + 1);
         c++;
     }
-    temporada.ndiaFinal = (diasDif - 1);
-    return temporada;
+    this.temporada[idTemp].ndiaFinal = (diasDif - 1);
+    console.log (this.temporada);
 }
-function addTemporada(idTemp: number, temporada: ITemporada){
+function addTemporada(year: number, temporada: ITemporada){
     let respuesta:any;
    
-    // añade al final del array de temporadas de  ese año
-    temporada.item = idTemp;
-    console.log("ntemp --->", idTemp);
-    // modificamos en el calendario la temporada vigente en esas fechas
-    return this.uptTemporada(temporada, idTemp);
+    TemporadasModel.findOne({year}, (err, temporadasDB) => {
+        if ( err ) throw err; 
+        if (temporadasDB) {
+          // añade al final del array de temporadas de  ese año
+            temporadasDB.temporada.push(temporada); 
+            const idTemp = temporadasDB.temporada.length-1;
+            temporadasDB.temporada[idTemp].item = idTemp;
+            console.log("ntemp --->", idTemp);
+            // modificamos en el calendario la temporada vigente en esas fechas
+            temporadasDB.uptTemporada(temporada, idTemp);
+            console.log("*****", temporadasDB._id, temporadasDB.temporada);
+            temporadasDB.save(function(err) {
+              if (err) return console.error(err);
+            });
+            /*
+            TemporadasModel.findByIdAndUpdate(temporadasDB._id,temporadasDB,{ new: true }, (err, temporadasDB) =>{
+              if ( err ) throw err; 
+              respuesta = {
+                ok: true,
+                mensaje: 'Temporada insertada', 
+                temporadasDB: temporadasDB
+              }
+              return (respuesta); 
+            })   */
+          }else{
+          //  this.temporada.push(temporada);
+            this.temporada.push(temporada);
+            this.uptTemporada(temporada, 0);
+            TemporadasModel.create(this)
+              .then( temporadaDB => {
+                respuesta = {
+                  ok: true,
+                  mensaje: 'Temporada Creada', 
+                  userDB: temporadaDB
+                }
+                return (respuesta);
+              }).catch( err => {
+                respuesta = {
+                  ok: false,
+                  mensaje: 'temporada no insertada ...'
+                }
+                return (respuesta);
+              })
+          }
+    })
 }
 
 export const TemporadasModel = model<ITemporadaYear>('Temporadas', temporadasSchema);

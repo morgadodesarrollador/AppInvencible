@@ -14,7 +14,6 @@ import { MsnAPIReserva, IReserva } from '../../../interfaces/ReservasInterface';
 export class ListarComponent implements OnInit {
   reservas: IReserva[];
   operador: string;
-  
   public params: IReserva  = {
     
     temporada: {

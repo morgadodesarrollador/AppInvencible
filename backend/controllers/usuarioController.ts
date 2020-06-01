@@ -90,7 +90,7 @@ class usuarioController {
     
     //UsuarioModel es un modelo de mongoose, para hacer busquedas,querys ...
     UsuarioModel.create(u)
-        .then( userDB => { //userDB regresa de mongodb
+      .then( userDB => { //userDB regresa de mongodb
           const tokenUser = Token.getJwtToken({ //payload
               _id: userDB._id,
               nombre: userDB.nombre,

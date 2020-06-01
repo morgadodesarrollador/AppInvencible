@@ -60,7 +60,6 @@ class reservasController {
         })
       }).catch(err => {
         console.log('okerr');
-
           res.json({
             ok: false,
             mensaje: 'noreervas'

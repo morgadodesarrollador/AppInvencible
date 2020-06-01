@@ -9,22 +9,29 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./listar.component.scss'],
 })
 export class ListarComponent implements OnInit {
+  anio: number;
 
-  temporadas: ITemporadas;
+  temporadas: ITemporadas = {
+    year: 2020,
+    temporada: null
+  };
+  
   constructor( private tS: TemporadasService, private navCtrl: NavController) {
-    this.getTemporada(2020);
 
    }
 
   async getTemporada(year){
+    console.log(year);
     const datos =  await this.tS.getTemporada(year);
     console.log(datos);
     this.temporadas = datos.temporadasDB;
+    
     // tslint:disable-next-line: forin
     for (let i = 0; i < this.temporadas.temporada.length; i++){
       this.temporadas.temporada[i].item = i;
       console.log(this.temporadas.temporada[i].item);
     }
+    this.tS.saveTemporadasStorage(this.temporadas);
     console.log(this.temporadas);
   }
 
@@ -33,5 +40,6 @@ export class ListarComponent implements OnInit {
     this.navCtrl.navigateRoot ('/temporadas/(temporada:update/' + item , { animated: true });
   }
   ngOnInit() {}
+
 
 }

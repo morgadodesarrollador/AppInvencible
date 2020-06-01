@@ -5,8 +5,8 @@ export  interface ITemporada {
     precioAdic?: number;
     precioFSemana?: number;
     precioSemana?: number;
-    fdesde?: Date;
-    fhasta?: Date;
+    fdesde?: string;
+    fhasta?: string;
     item?: number;
 }
 

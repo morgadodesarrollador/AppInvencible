@@ -31,8 +31,11 @@ server.app.use(function(req, res, next) {
   });
 
 //conectar BD Mongo
+mongoose.set('useFindAndModify', false);
+mongoose.Promise = global.Promise;
+mongoose.set('runValidators', true); // here is your global setting
 mongoose.connect('mongodb://185.166.212.59:27017/AppTuristico',
-                    { useCreateIndex: true, useNewUrlParser: true },
+       { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
   ( err ) => {
     if ( err ) throw err;
     console.log('BD Online');
