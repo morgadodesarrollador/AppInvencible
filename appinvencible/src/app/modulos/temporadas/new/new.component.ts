@@ -28,9 +28,11 @@ export class NewComponent implements OnInit {
               private storage: Storage, private navCtrl: NavController) { }
 
   async editar(){
-   // console.log('edit', this.idTemp, this.temporada);
+    console.log ("--------", this.temporada , this.temporadas.year);
+
     this.temporada.item = this.idTemp;
-    await this.tS.new(this.temporada,  this.idTemp);
+    this.temporada.year = this.temporadas.year; 
+    await this.tS.new(this.temporada, this.temporadas.year);
     
   }
 
@@ -53,7 +55,7 @@ export class NewComponent implements OnInit {
   }
 
   async new() {
-    console.log ( this.temporada );
+    console.log ( this.temporada , this.temporadas.year);
     this.temporada.item = null;
     this.navCtrl.navigateRoot ('/temporadas/(temporada:listar)', { animated: true });
     await this.tS.new(this.temporada);

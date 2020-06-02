@@ -41,7 +41,7 @@ export class TemporadasService {
   }
 
 
-  new(temporada: ITemporada, idTemp?: number): Promise<MsnAPITemporada> {
+  new(temporada: ITemporada, idyear?: number): Promise<MsnAPITemporada> {
     const opciones = {
       headers: {
         'x-token': this.uS.token
@@ -52,7 +52,7 @@ export class TemporadasService {
     console.log (opciones);
     if (temporada.item == null){
       return new Promise (resolve => {
-        this.http.post<MsnAPITemporada>(ruta, temporada, opciones)
+        this.http.post<MsnAPITemporada>(ruta, {temporada, idyear}, opciones)
           .subscribe (respuesta => {
             console.log(respuesta);
           })
@@ -61,7 +61,8 @@ export class TemporadasService {
       ruta = `${ URL }/temporada/edit`;
       console.log(ruta);
       return new Promise (resolve => {
-        this.http.post<MsnAPITemporada>(ruta, temporada, opciones)
+        console.log({temporada, idyear});
+        this.http.post<MsnAPITemporada>(ruta, {temporada, idyear}, opciones)
           .subscribe (respuesta => {
             console.log(respuesta)
           })

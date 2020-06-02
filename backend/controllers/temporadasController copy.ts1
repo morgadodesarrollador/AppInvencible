@@ -42,24 +42,13 @@ class temporadasController {
    // TemporadasModel.find({},{ temporada:{$slice:[idTemp,1]} }, { new: true })
 
     console.log(temporada);
-  //  const temporadaUpt: any = TemporadaYear.addTemporada(idTemp, temporada);
-    TemporadasModel.findOne({"year":year})
-      .then(temporadasDB => {
-          const temporadaUpt: any = temporadasDB.addTemporada(idTemp, temporada);
-          console.log ("ok",idTemp, temporadaUpt);
-          temporadasDB.temporada[idTemp] = temporadaUpt;
-          TemporadasModel.updateOne({"year":year ,"temporada._id": temporada._id}, 
+    let TemporadaYear = new TemporadasModel();
+    const temporadaUpt: any = TemporadaYear.addTemporada(idTemp, temporada);
+    console.log(temporadaUpt);
+    TemporadasModel.updateOne({"year":year ,"temporada._id": temporada._id}, 
                               {$set:{"temporada.$": temporadaUpt}}, {new: true})
-          .then(data => {
-            console.log ("ok", data);
-          })
-          .catch (err => {
-            console.log (err)
-          })                   
-         
-         /*                     temporadasDB.save(function(err) {
-            if (err) return console.log(err);
-          }); */
+      .then(data => {
+        console.log ("ok", data);
       })
       .catch (err => {
         console.log (err)

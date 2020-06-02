@@ -11,6 +11,7 @@ const diaSchema = new Schema ({
 
 const temporadaSchema = new Schema({
   nombre: { type: String },
+  item: { type: Number },
   precioBase: { type: Number },
   precioAdic: { type: Number },
   precioSemana: { type: Number },
